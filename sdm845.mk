@@ -38,6 +38,7 @@ PRODUCT_COPY_FILES += \
 # Always preopt extracted APKs to prevent extracting out of the APK
 # for gms modules.
 PRODUCT_ALWAYS_PREOPT_EXTRACTED_APK := true
+USE_DEX2OAT_DEBUG := false
 
 # A/B support
 PRODUCT_PACKAGES += \
