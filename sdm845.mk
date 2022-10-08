@@ -345,6 +345,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/permissions/telephony_product_privapp-permissions-qti.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/telephony_product_privapp-permissions-qti.xml \
     $(LOCAL_PATH)/configs/permissions/telephony_system-ext_privapp-permissions-qti.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/telephony_system-ext_privapp-permissions-qti.xml
 
+# Properties
+include $(LOCAL_PATH)/vendor_logtag.mk
+
 # Recovery
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery/root/init.recovery.hardware.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.$(DEVICE_NAME).rc
