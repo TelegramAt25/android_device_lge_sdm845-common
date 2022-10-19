@@ -324,6 +324,10 @@ $(call soong_config_set,lineage_recovery,bootloader_message_offset,128)
 PRODUCT_PACKAGES += \
     android.hardware.radio@1.4-service.lge
 
+# Remove unwanted packages
+PRODUCT_PACKAGES += \
+    remove_packages
+
 # Seccomp policy
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/seccomp/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
