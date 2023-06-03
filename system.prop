@@ -35,6 +35,9 @@ dalvik.vm.dex2oat64.enabled=true
 # Fastbootd
 ro.fastbootd.available=true
 
+# Logd
+ro.logd.kernel=false
+
 # Media
 media.settings.xml=/vendor/etc/media_profiles_vendor.xml
 
