@@ -61,7 +61,7 @@ PRODUCT_OTHER_JAVA_DEBUG_INFO := false
 
 # Disable async MTE on system_server
 PRODUCT_SYSTEM_EXT_PROPERTIES += \
-    arm64.memtag.process.system_server=off
+    persist.arm64.memtag.system_server=off
 
 # A/B support
 PRODUCT_PACKAGES += \
