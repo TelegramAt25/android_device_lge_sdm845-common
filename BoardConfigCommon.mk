@@ -105,8 +105,7 @@ BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 TARGET_KERNEL_SOURCE := kernel/lge/sdm845
 
 # Malloc
-MALLOC_SVELTE := true
-MALLOC_SVELTE_FOR_LIBC32 := true
+MALLOC_LOW_MEMORY := true
 
 # Media
 TARGET_USES_ION := true
