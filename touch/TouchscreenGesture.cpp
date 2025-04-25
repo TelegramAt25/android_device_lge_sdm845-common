@@ -21,14 +21,14 @@
 #include <android-base/file.h>
 #include <android-base/logging.h>
 #include <cutils/properties.h>
+#include <map>
 
 #include "TouchscreenGesture.h"
 
+namespace aidl {
 namespace vendor {
 namespace lineage {
 namespace touch {
-namespace V1_0 {
-namespace implementation {
 
 const std::string kGesturePath = "/sys/devices/virtual/input/lge_touch/swipe_enable";
 
@@ -66,36 +66,41 @@ TouchscreenGesture::TouchscreenGesture() {
 
 }
 
-Return<void> TouchscreenGesture::getSupportedGestures(getSupportedGestures_cb resultCb) {
+ndk::ScopedAStatus TouchscreenGesture::getSupportedGestures(std::vector<Gesture>* _aidl_return) {
     std::vector<Gesture> gestures;
 
     for (const auto& entry : kGestureInfoMap) {
         gestures.push_back({entry.first, entry.second.name, entry.second.keycode});
     }
-    resultCb(gestures);
 
-    return Void();
+    *_aidl_return = gestures;
+    return ndk::ScopedAStatus::ok();
 }
 
-Return<bool> TouchscreenGesture::setGestureEnabled(
-    const ::vendor::lineage::touch::V1_0::Gesture& gesture, bool enable) {
+ndk::ScopedAStatus TouchscreenGesture::setGestureEnabled(
+    const ::aidl::vendor::lineage::touch::Gesture& gesture, bool enable) {
 
     std::ofstream file(kGesturePath);
     std::map<int32_t, GestureInfo>::iterator it;
     it = kGestureInfoMap.find(gesture.id);
     if(it == kGestureInfoMap.end()) {
-        return false;
+        return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
     }
 
     std::string output = std::to_string(it->first) + " " + std::to_string(enable);
     
     file << output;
 
-    return !file.fail();
+    if (!file) {
+        LOG(ERROR) << "Failed to write gesture " << std::to_string(it->first) << "=" << std::to_string(enable);
+        return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
+    }
+
+    return ndk::ScopedAStatus::ok();
 }
 
-}  // namespace implementation
-}  // namespace V1_0
 }  // namespace touch
 }  // namespace lineage
 }  // namespace vendor
+
+}  // namespace aidl
