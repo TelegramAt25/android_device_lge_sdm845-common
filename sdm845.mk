@@ -67,6 +67,8 @@ PRODUCT_SYSTEM_EXT_PROPERTIES += \
 PRODUCT_PACKAGES += \
     otapreopt_script \
     update_engine \
+    update_engine_client \
+    update_engine_sideload \
     update_verifier
 
 PRODUCT_PACKAGES += \
@@ -80,11 +82,6 @@ AB_OTA_POSTINSTALL_CONFIG += \
     POSTINSTALL_PATH_system=system/bin/otapreopt_script \
     FILESYSTEM_TYPE_system=ext4 \
     POSTINSTALL_OPTIONAL_system=true
-
-# The following modules are included in debuggable builds only.
-PRODUCT_PACKAGES_DEBUG += \
-    update_engine_client \
-    update_engine_sideload
 
 # Audio
 PRODUCT_PACKAGES += \
